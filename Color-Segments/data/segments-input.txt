@@ -1,0 +1,5 @@
+﻿3x6|5x10|green
+3x6|15x26|red
+3x7|7x4|yellow
+3x6|15x10|blue
+3x6|15x26|green

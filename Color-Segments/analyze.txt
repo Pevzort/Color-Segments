@@ -1,0 +1,113 @@
+﻿1. Задача:
+
+В файле заданы отрезки:
+ - начало
+ - конец
+ - цвет
+ 
+Найти и вывести отрезок максимальной длины с заданным цветом
+
+2. Сущности
+	Список отрезков(SegmantsList)
+	Отрезок(Segment)
+	Список цветов(ColorsList)
+	Цвет(Color)
+	Manager(Main)
+
+3. Прецеденты:
+	- Загрузка данных отрезков из файла.
+	- Считывание цвета который задает пользователь.
+	- Проверка, присутствует ли цвет в списке отрезков.
+	- Нахождение максимального отрезка заданного цвета.
+	- Вывод результата на экран
+	
+4. 
+	- Загрузка данных отрезков из файла.
+		Участники: Manager, SegmentsList
+		Обязанности: 
+			SegmentsList: 
+				-загрузка отрезков из файла с указанным именем SegmantsList Load(String filename)	
+			ColorsList: 
+				-загрузка цветов из файла с указанным именем ColorsList Load(String filename)
+			Manager: 
+				- запуск считывания для SegmantsList.
+				- запуск считывания для ColorsList.
+
+	- Считывание цвета который задает пользователь.
+		Участники: Manager, Color
+		Обязанности:
+			Color: 
+				- Считывание цвета с клавиатуры: Color ReadFromKbd()
+			Manager:
+				- запуск команды для считываения цвета;
+		
+	- Проверка, присутствует ли цвет в списке отрезков.
+		Участники: Manager, ColorList
+		Обязанности:
+			ColorList: 
+				- Проверка на присутствуие цвета в списке отрезков: bool CheckColorToListColor(Color color)
+			Manager:
+				- запуск команды для проверки цвета;
+
+	- Нахождение максимального отрезка заданного цвета.
+		Участники: Manager, SegmentsList
+		Обязанности: 
+			SegmentsList: 
+				-Нахождения максимального отрезка заданного цвета из списка Segment FindMaxSegmentByColor(string color)
+			Manager: 
+				- запуск команды для SegmantsList.
+	
+	- Вывод результата на экран
+		Участники: Manager, Segment
+		Обязанности: 
+			Segment: 
+				-Вывод данных на экран void Print();
+			Manager: 
+				- запуск команды для Segment.
+
+5. Описание классов
+
+class ColorList
+{
+	static public ColorsList Load(string filename){}
+    public bool CheckColorToListColor(Color color){}
+
+    private void Add(Color color){}
+    private List<Color> _colorsList = new List<Color>();
+}
+
+class Color
+{
+    public Color(string color) {}
+
+    static public Color ReadFromKbd() {}
+    
+	public string ColorValue { get { return _color; } }
+    
+	private string _color;
+}
+
+class SegmentsList
+{
+    public static SegmentsList Load(string filename) {}
+    public Segment FindMaxSegmentByColor(string color) {}
+
+    private List<Segment> _segmentsList;
+}
+
+ class Segment
+{
+    public void Print() { }
+    public string Color { get { return _color; } }
+    public double Length
+    {
+        get
+        {
+            return Math.Sqrt(Math.Pow(_end.X - _start.X, 2) + Math.Pow(_end.Y - _start.Y, 2));
+        }
+    }
+
+    private string _color;
+    private System.Drawing.Point _start;
+    private System.Drawing.Point _end;
+}
